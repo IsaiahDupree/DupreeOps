@@ -22,33 +22,39 @@ export default function Privacy() {
       <Head>
         <title>Privacy Policy • Dupree Ops, LLC</title>
         <meta name="description" content="Privacy Policy for Dupree Ops, LLC and its products." />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+        />
+        <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
       </Head>
 
       <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
-        <div className="max-w-4xl mx-auto px-4 py-6 md:py-10 space-y-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-10 space-y-4 sm:space-y-6">
           {/* Header with theme toggle */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
             <Link
               href="/"
               onClick={() => trackLinkClick('/', 'Back to home')}
-              className="text-sm md:text-base text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors"
+              className="text-sm sm:text-base text-emerald-700 active:text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:active:text-emerald-300 dark:hover:text-emerald-300 transition-colors touch-manipulation"
             >
               [ ← Back to home ]
             </Link>
             <button
               type="button"
               onClick={handleThemeToggle}
-              className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-800 shadow-sm hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-800 shadow-sm active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[44px]"
             >
               <span className="text-xs">{theme === 'dark' ? '🌙' : '☀️'}</span>
               <span>{theme === 'dark' ? 'Dark mode' : 'Light mode'}</span>
             </button>
           </div>
 
-          <div className="rounded-lg border border-slate-200 bg-white/90 p-4 md:p-6 dark:border-slate-800 dark:bg-slate-900/70">
+          <div className="rounded-lg border border-slate-200 bg-white/90 p-4 sm:p-5 md:p-6 dark:border-slate-800 dark:bg-slate-900/70">
             <AsciiHeading label="PRIVACY POLICY" />
 
-            <div className="mt-6 space-y-4 text-sm md:text-base text-slate-700 dark:text-slate-200">
+            <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-5 text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
               <div>
                 <p className="text-emerald-700 dark:text-emerald-400 mb-2 font-semibold">
                   &gt;&gt; Last Updated: {new Date().toLocaleDateString()}

@@ -13,6 +13,14 @@ module.exports = {
         display: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
+      screens: {
+        'xs': '475px',
+        // Tailwind defaults: sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1536px
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+      },
     },
   },
   plugins: [],

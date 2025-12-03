@@ -67,20 +67,28 @@ export default function Home() {
           name="description"
           content="Official business website for Dupree Ops, LLC – operator of software, AI, and automation products."
         />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+        />
+        <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </Head>
 
       <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
-        <div className="max-w-5xl mx-auto px-4 py-6 md:py-10 space-y-8 md:space-y-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-10 space-y-6 sm:space-y-8 md:space-y-10">
           {/* TOP BAR: title + theme toggle + time */}
-          <header className="flex items-center justify-between gap-3">
-            <div>
-              <pre className="text-xs md:text-sm leading-snug text-emerald-700 dark:text-emerald-400 whitespace-pre font-mono">
+          <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+            <div className="flex-1 min-w-0">
+              <pre className="text-[9px] xs:text-[10px] sm:text-xs md:text-sm leading-snug text-emerald-700 dark:text-emerald-400 whitespace-pre font-mono overflow-x-auto">
 {String.raw`╔══════════════════════════════════════════════════════════════╗
 ║                         DUPREE OPS, LLC                      ║
 ║        AI & AUTOMATION STUDIO FOR MODERN BUSINESSES          ║
 ╚══════════════════════════════════════════════════════════════╝`}
               </pre>
-              <p className="mt-2 text-sm md:text-base text-slate-600 dark:text-slate-300">
+              <p className="mt-2 text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300">
                 &gt; Official business website for{' '}
                 <span className="font-semibold">Dupree Ops, LLC</span>. Used to verify ownership
                 and operations of our products with providers such as Stripe, Twilio, and app
@@ -88,63 +96,64 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex flex-col items-end gap-2">
+            <div className="flex flex-row sm:flex-col items-center sm:items-end gap-2 sm:gap-2 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={handleThemeToggle}
-                className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-800 shadow-sm hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-800 shadow-sm active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[44px]"
               >
-                <span className="text-xs">{theme === 'dark' ? '🌙' : '☀️'}</span>
-                <span>{theme === 'dark' ? 'Dark mode' : 'Light mode'}</span>
+                <span className="text-base">{theme === 'dark' ? '🌙' : '☀️'}</span>
+                <span className="hidden xs:inline">{theme === 'dark' ? 'Dark mode' : 'Light mode'}</span>
               </button>
-              <div className="text-sm md:text-base text-slate-500 dark:text-slate-400 text-right">
-                <div>Local time (ET)</div>
-                <div className="font-mono">{timeString || '--:--:--'}</div>
+              <div className="text-xs sm:text-sm md:text-base text-slate-500 dark:text-slate-400 text-right sm:text-right">
+                <div className="hidden sm:block">Local time (ET)</div>
+                <div className="sm:hidden text-[10px]">ET</div>
+                <div className="font-mono text-xs sm:text-sm">{timeString || '--:--:--'}</div>
               </div>
             </div>
           </header>
 
           {/* HERO: founder / company snapshot (Yadwinder-style) */}
           <section aria-label="Company Snapshot">
-            <div className="grid gap-5 md:grid-cols-[minmax(0,1.6fr)_minmax(0,1.2fr)]">
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-[minmax(0,1.6fr)_minmax(0,1.2fr)]">
               {/* Left: founder-style card */}
-              <div className="rounded-lg border border-slate-200 bg-white/90 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
-                <h1 className="text-xl md:text-2xl font-display font-semibold">Isaiah Dupree</h1>
-                <p className="mt-1 text-base text-slate-600 dark:text-slate-300">
+              <div className="rounded-lg border border-slate-200 bg-white/90 p-4 sm:p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
+                <h1 className="text-lg sm:text-xl md:text-2xl font-display font-semibold">Isaiah Dupree</h1>
+                <p className="mt-1 text-sm sm:text-base text-slate-600 dark:text-slate-300">
                   Founder, Dupree Ops, LLC • AI & Automation Systems
                 </p>
 
-                <p className="mt-3 text-base text-slate-700 dark:text-slate-200">
+                <p className="mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
                   I build and operate software products that turn complex workflows into simple,
                   repeatable systems. Dupree Ops, LLC is the studio behind several AI- and
                   automation-powered tools for creators, engineers, and small businesses.
                 </p>
-                <p className="mt-2 text-base text-slate-700 dark:text-slate-200">
+                <p className="mt-2 text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
                   From engineering calculators to social growth infrastructure and custom
                   automations, our focus is on clarity, reliability, and measurable impact.
                 </p>
 
-                <div className="mt-4 flex flex-wrap items-center gap-3">
+                <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-2.5 sm:gap-3">
                   <a
                     href="mailto:hello@dupreeops.com"
                     onClick={() => trackEmailClick('hello@dupreeops.com')}
-                    className="inline-flex items-center justify-center rounded-full border border-slate-900 bg-slate-900 px-4 py-2 text-sm font-medium text-slate-50 shadow-sm hover:bg-black dark:border-slate-100 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white transition-colors"
+                    className="inline-flex items-center justify-center rounded-full border border-slate-900 bg-slate-900 px-4 sm:px-5 py-2.5 sm:py-3 text-sm font-medium text-slate-50 shadow-sm active:bg-black hover:bg-black dark:border-slate-100 dark:bg-slate-100 dark:text-slate-900 dark:active:bg-white dark:hover:bg-white transition-colors touch-manipulation min-h-[44px]"
                   >
                     Send an email
                   </a>
-                    <span className="inline-flex items-center rounded-full border border-emerald-500/70 bg-emerald-50 px-3 py-1.5 text-sm font-medium text-emerald-700 dark:border-emerald-400/70 dark:bg-emerald-900/40 dark:text-emerald-200">
+                    <span className="inline-flex items-center rounded-full border border-emerald-500/70 bg-emerald-50 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-emerald-700 dark:border-emerald-400/70 dark:bg-emerald-900/40 dark:text-emerald-200">
                     Available for select partnerships
                   </span>
                 </div>
               </div>
 
               {/* Right: quick "experience / focus / links" */}
-              <div className="space-y-3 text-sm md:text-base">
-                <div className="rounded-lg border border-slate-200 bg-white/90 p-3 dark:border-slate-800 dark:bg-slate-900/70">
-                  <p className="text-emerald-700 dark:text-emerald-400 font-semibold mb-1">
+              <div className="space-y-3 sm:space-y-3 text-xs sm:text-sm md:text-base">
+                <div className="rounded-lg border border-slate-200 bg-white/90 p-3 sm:p-4 dark:border-slate-800 dark:bg-slate-900/70">
+                  <p className="text-emerald-700 dark:text-emerald-400 font-semibold mb-2 text-xs sm:text-sm">
                     EXPERIENCE & FOCUS
                   </p>
-                  <ul className="space-y-1 text-slate-700 dark:text-slate-200">
+                  <ul className="space-y-1.5 text-slate-700 dark:text-slate-200 leading-relaxed">
                     <li>▸ AI & workflow automation systems</li>
                     <li>▸ Web & mobile SaaS products</li>
                     <li>▸ Engineering tools & calculators</li>
@@ -152,11 +161,11 @@ export default function Home() {
                   </ul>
                 </div>
 
-                <div className="rounded-lg border border-slate-200 bg-white/90 p-3 dark:border-slate-800 dark:bg-slate-900/70">
-                  <p className="text-emerald-700 dark:text-emerald-400 font-semibold mb-1">
+                <div className="rounded-lg border border-slate-200 bg-white/90 p-3 sm:p-4 dark:border-slate-800 dark:bg-slate-900/70">
+                  <p className="text-emerald-700 dark:text-emerald-400 font-semibold mb-2 text-xs sm:text-sm">
                     LET&apos;S GET IN TOUCH
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 sm:gap-2.5">
                     {/* TODO: replace # with real profiles or remove */}
                     <a
                       href="#"
@@ -164,7 +173,7 @@ export default function Home() {
                         e.preventDefault()
                         trackLinkClick('#', 'Twitter / X')
                       }}
-                      className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+                      className="inline-flex items-center rounded-full border border-slate-300 px-3 sm:px-3.5 py-2 sm:py-2 text-xs sm:text-sm text-slate-700 active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[40px]"
                     >
                       Twitter / X
                     </a>
@@ -174,7 +183,7 @@ export default function Home() {
                         e.preventDefault()
                         trackLinkClick('#', 'LinkedIn')
                       }}
-                      className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+                      className="inline-flex items-center rounded-full border border-slate-300 px-3 sm:px-3.5 py-2 sm:py-2 text-xs sm:text-sm text-slate-700 active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[40px]"
                     >
                       LinkedIn
                     </a>
@@ -184,14 +193,14 @@ export default function Home() {
                         e.preventDefault()
                         trackLinkClick('#', 'GitHub')
                       }}
-                      className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+                      className="inline-flex items-center rounded-full border border-slate-300 px-3 sm:px-3.5 py-2 sm:py-2 text-xs sm:text-sm text-slate-700 active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[40px]"
                     >
                       GitHub
                     </a>
                     <a
                       href="mailto:support@dupreeops.com"
                       onClick={() => trackEmailClick('support@dupreeops.com')}
-                      className="inline-flex items-center rounded-full border border-slate-300 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+                      className="inline-flex items-center rounded-full border border-slate-300 px-3 sm:px-3.5 py-2 sm:py-2 text-xs sm:text-sm text-slate-700 active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[40px]"
                     >
                       Support
                     </a>
@@ -254,29 +263,29 @@ export default function Home() {
                 traffic.
               </p>
 
-              <div className="grid gap-3 md:grid-cols-2">
+              <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
                 {products.map((product) => (
                   <div
                     key={product.name}
-                    className="flex flex-col justify-between rounded-md border border-slate-200 bg-slate-50/80 p-3 dark:border-slate-700 dark:bg-slate-950/70"
+                    className="flex flex-col justify-between rounded-md border border-slate-200 bg-slate-50/80 p-3 sm:p-4 dark:border-slate-700 dark:bg-slate-950/70"
                   >
                     <div>
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <span className="font-semibold text-sm md:text-base text-slate-900 dark:text-slate-50">
+                      <div className="flex items-center justify-between gap-2 mb-1.5 sm:mb-2">
+                        <span className="font-semibold text-sm sm:text-base text-slate-900 dark:text-slate-50">
                           {product.name}
                         </span>
                       </div>
-                      <p className="text-sm md:text-base text-slate-700 dark:text-slate-200">
+                      <p className="text-xs sm:text-sm md:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
                         {product.description}
                       </p>
                     </div>
-                    <div className="mt-2">
+                    <div className="mt-3 sm:mt-4">
                       <a
                         href={product.url}
                         target="_blank"
                         rel="noreferrer"
                         onClick={() => trackProductClick(product.name, product.url)}
-                        className="inline-flex items-center text-sm md:text-base text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors"
+                        className="inline-flex items-center text-sm sm:text-base text-emerald-700 active:text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:active:text-emerald-300 dark:hover:text-emerald-300 transition-colors touch-manipulation py-1"
                       >
                         [ visit site → ]
                       </a>
@@ -303,7 +312,7 @@ export default function Home() {
                 provides additional terms.
               </p>
 
-              <div className="grid gap-3 md:grid-cols-3 text-sm md:text-base">
+              <div className="grid gap-3 sm:gap-4 md:grid-cols-3 text-xs sm:text-sm md:text-base">
                 <div className="rounded-md border border-slate-200 bg-slate-50/80 p-3 dark:border-slate-700 dark:bg-slate-950/70">
                   <p className="text-emerald-700 dark:text-emerald-400 mb-1 font-semibold">
                     ► Terms of Service
