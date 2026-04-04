@@ -166,33 +166,29 @@ export default function Home() {
                     LET&apos;S GET IN TOUCH
                   </p>
                   <div className="flex flex-wrap gap-2 sm:gap-2.5">
-                    {/* TODO: replace # with real profiles or remove */}
                     <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        trackLinkClick('#', 'Twitter / X')
-                      }}
+                      href="https://x.com/isaiahdupree33"
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => trackLinkClick('https://x.com/isaiahdupree33', 'Twitter / X')}
                       className="inline-flex items-center rounded-full border border-slate-300 px-3 sm:px-3.5 py-2 sm:py-2 text-xs sm:text-sm text-slate-700 active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[40px]"
                     >
                       Twitter / X
                     </a>
                     <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        trackLinkClick('#', 'LinkedIn')
-                      }}
+                      href="https://www.linkedin.com/in/isaiah-dupree33/"
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => trackLinkClick('https://www.linkedin.com/in/isaiah-dupree33/', 'LinkedIn')}
                       className="inline-flex items-center rounded-full border border-slate-300 px-3 sm:px-3.5 py-2 sm:py-2 text-xs sm:text-sm text-slate-700 active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[40px]"
                     >
                       LinkedIn
                     </a>
                     <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        trackLinkClick('#', 'GitHub')
-                      }}
+                      href="https://github.com/IsaiahDupree"
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => trackLinkClick('https://github.com/IsaiahDupree', 'GitHub')}
                       className="inline-flex items-center rounded-full border border-slate-300 px-3 sm:px-3.5 py-2 sm:py-2 text-xs sm:text-sm text-slate-700 active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[40px]"
                     >
                       GitHub
@@ -234,7 +230,10 @@ export default function Home() {
                   <p className="text-slate-700 dark:text-slate-200">
                     Registered name: Dupree Ops, LLC
                   </p>
-                  <p className="text-slate-700 dark:text-slate-200">Jurisdiction: United States</p>
+                  <p className="text-slate-700 dark:text-slate-200">Jurisdiction: Florida, United States</p>
+                  <p className="text-slate-700 dark:text-slate-200">
+                    Mailing address: Orlando, FL — contact us for full address on file
+                  </p>
                   <p className="text-slate-700 dark:text-slate-200">
                     Primary focus: Software, AI, and workflow automation
                   </p>
@@ -312,7 +311,7 @@ export default function Home() {
                 provides additional terms.
               </p>
 
-              <div className="grid gap-3 sm:gap-4 md:grid-cols-3 text-xs sm:text-sm md:text-base">
+              <div className="grid gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4 text-xs sm:text-sm md:text-base">
                 <div className="rounded-md border border-slate-200 bg-slate-50/80 p-3 dark:border-slate-700 dark:bg-slate-950/70">
                   <p className="text-emerald-700 dark:text-emerald-400 mb-1 font-semibold">
                     ► Terms of Service
@@ -363,11 +362,69 @@ export default function Home() {
                     [ view /billing ]
                   </a>
                 </div>
+
+                <div className="rounded-md border border-slate-200 bg-slate-50/80 p-3 dark:border-slate-700 dark:bg-slate-950/70">
+                  <p className="text-emerald-700 dark:text-emerald-400 mb-1 font-semibold">
+                    ► SMS Policy
+                  </p>
+                  <p className="text-slate-700 dark:text-slate-200 mb-2">
+                    SMS opt-in/opt-out, message frequency, sample messages, and carrier
+                    information for our Twilio-powered messaging programs.
+                  </p>
+                  <a
+                    href="/sms"
+                    onClick={() => trackLinkClick('/sms', 'SMS Policy')}
+                    className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors"
+                  >
+                    [ view /sms ]
+                  </a>
+                </div>
+              </div>
+
+              <div className="rounded-md border border-emerald-200 bg-emerald-50/60 p-3 sm:p-4 text-sm md:text-base dark:border-emerald-900/50 dark:bg-emerald-950/30">
+                <p className="text-emerald-700 dark:text-emerald-400 mb-2 font-semibold">
+                  ► SMS / Text Messaging Program
+                </p>
+                <p className="text-slate-700 dark:text-slate-200 mb-2">
+                  Dupree Ops, LLC sends SMS messages through Twilio for transactional notifications
+                  related to our products (e.g. appointment confirmations, account alerts, service
+                  updates). Users provide explicit opt-in consent at the point of account creation
+                  or service enrollment.
+                </p>
+                <ul className="list-none space-y-1 text-slate-700 dark:text-slate-200 ml-3 mb-2">
+                  <li>▸ <strong>Opt-in:</strong> Users check a consent box at sign-up or reply START to an enrollment message.</li>
+                  <li>▸ <strong>Opt-out:</strong> Reply STOP to any message to unsubscribe immediately.</li>
+                  <li>▸ <strong>Help:</strong> Reply HELP for support. Contact support@dupreeops.com.</li>
+                  <li>▸ <strong>Message frequency:</strong> Varies by service; typically 1–5 messages per month.</li>
+                  <li>▸ <strong>Rates:</strong> Message and data rates may apply.</li>
+                </ul>
+                <p className="text-slate-700 dark:text-slate-200">
+                  Sample messages: <em>"Your appointment is confirmed for [date] at [time]. Reply STOP to unsubscribe."</em>{' '}
+                  |{' '}<em>"Action required: verify your account by clicking [link]. Reply STOP to opt out."</em>
+                </p>
+                <p className="mt-2 text-slate-600 dark:text-slate-300 text-xs sm:text-sm">
+                  Full SMS policy:{' '}
+                  <a
+                    href="/sms"
+                    onClick={() => trackLinkClick('/sms', 'SMS Policy')}
+                    className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors"
+                  >
+                    dupreeops.com/sms
+                  </a>
+                </p>
               </div>
 
               <p className="text-sm md:text-base text-slate-500 dark:text-slate-400">
-                Messaging traffic sent via Twilio and similar providers follows our opt-in and
-                opt-out policies, including support for STOP/UNSUBSCRIBE commands where applicable.
+                Messaging traffic sent via Twilio follows our opt-in and opt-out policies, including
+                support for STOP/UNSUBSCRIBE commands. See{' '}
+                <a
+                  href="/billing"
+                  onClick={() => trackLinkClick('/billing', 'Billing & Messaging')}
+                  className="text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors"
+                >
+                  /billing
+                </a>{' '}
+                for full details.
               </p>
             </div>
           </section>

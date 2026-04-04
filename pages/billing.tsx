@@ -157,6 +157,7 @@ export default function Billing() {
                 <ul className="list-none space-y-1 ml-4">
                   <li>▸ Payment receipts and invoices</li>
                   <li>▸ Account verification and security alerts</li>
+                  <li>▸ Appointment and scheduling confirmations</li>
                   <li>▸ Service notifications and updates</li>
                   <li>▸ Support responses</li>
                 </ul>
@@ -164,6 +165,27 @@ export default function Billing() {
                   These messages are sent via email and, when applicable, SMS through Twilio. You
                   cannot opt out of transactional messages as they are essential for service
                   delivery.
+                </p>
+                <p className="mt-2 text-slate-600 dark:text-slate-300">
+                  Sample transactional SMS:{' '}
+                  <em>"Dupree Ops: Your appointment is confirmed for [date] at [time]. Reply STOP to unsubscribe. Msg &amp; data rates may apply."</em>
+                </p>
+              </div>
+
+              <div>
+                <p className="text-emerald-700 dark:text-emerald-400 mb-2 font-semibold">
+                  &gt;&gt; SMS Opt-In Process
+                </p>
+                <p className="mb-2">
+                  We obtain explicit consent before sending SMS. Users opt in by:
+                </p>
+                <ul className="list-none space-y-1 ml-4">
+                  <li>▸ Checking an SMS consent checkbox during account sign-up or service enrollment</li>
+                  <li>▸ Replying <strong>START</strong> to an SMS enrollment message</li>
+                  <li>▸ Providing a phone number in a product intake form with SMS consent indicated</li>
+                </ul>
+                <p className="mt-2">
+                  We will never send SMS to a number that has not explicitly opted in.
                 </p>
               </div>
 
@@ -180,10 +202,29 @@ export default function Billing() {
                 <p className="mt-2">Marketing messages require your explicit opt-in. You can opt out at any time by:</p>
                 <ul className="list-none space-y-1 ml-4 mt-2">
                   <li>▸ Clicking the unsubscribe link in any marketing email</li>
-                  <li>▸ Replying "STOP" to SMS messages (where supported)</li>
+                  <li>▸ Replying <strong>STOP</strong> to any SMS (immediately unsubscribes you)</li>
+                  <li>▸ Replying <strong>CANCEL</strong> or <strong>UNSUBSCRIBE</strong> (same effect as STOP)</li>
                   <li>▸ Updating your preferences in your account settings</li>
-                  <li>▸ Contacting us at support@dupreeops.com</li>
+                  <li>▸ Contacting us at{' '}
+                    <a
+                      href="mailto:support@dupreeops.com"
+                      onClick={() => trackEmailClick('support@dupreeops.com')}
+                      className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors"
+                    >
+                      support@dupreeops.com
+                    </a>
+                  </li>
                 </ul>
+                <p className="mt-2">
+                  Reply <strong>HELP</strong> to any SMS for help. <strong>Msg &amp; data rates may apply.</strong>
+                  {' '}Full SMS policy: <a
+                    href="/sms"
+                    onClick={() => trackLinkClick('/sms', 'SMS Policy')}
+                    className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors"
+                  >
+                    dupreeops.com/sms
+                  </a>
+                </p>
               </div>
 
               <div>
