@@ -232,7 +232,7 @@ export default function Home() {
                   </p>
                   <p className="text-slate-700 dark:text-slate-200">Jurisdiction: Florida, United States</p>
                   <p className="text-slate-700 dark:text-slate-200">
-                    Mailing address: Orlando, FL — contact us for full address on file
+                    Mailing address: 3425 Delaney Drive, Melbourne, FL 32934
                   </p>
                   <p className="text-slate-700 dark:text-slate-200">
                     Primary focus: Software, AI, and workflow automation

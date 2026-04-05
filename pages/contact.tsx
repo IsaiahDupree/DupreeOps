@@ -96,7 +96,7 @@ export default function Contact() {
                   &gt;&gt; Business Information
                 </p>
                 <p>Dupree Ops, LLC</p>
-                <p>Florida, United States</p>
+                <p>3425 Delaney Drive, Melbourne, FL 32934</p>
                 <p className="mt-1 text-slate-600 dark:text-slate-300">
                   For written correspondence or provider verification, contact us via email with
                   your reference ID and we will provide documentation confirming ownership of

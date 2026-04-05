@@ -72,7 +72,7 @@ export default function SmsPolicy() {
                 <p>
                   <strong>Dupree Ops, LLC</strong> — AI &amp; Automation Studio
                   <br />
-                  Jurisdiction: Florida, United States
+                  Address: 3425 Delaney Drive, Melbourne, FL 32934
                   <br />
                   Contact:{' '}
                   <a
