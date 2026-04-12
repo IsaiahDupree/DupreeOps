@@ -248,6 +248,75 @@ export default function SmsPolicy() {
               </div>
             </div>
           </div>
+
+          {/* OPT-IN FORM — consent language shown BEFORE submit button (Twilio TFV requirement) */}
+          <div className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-4 sm:p-5 md:p-6 dark:border-emerald-900/50 dark:bg-emerald-950/30">
+            <AsciiHeading label="OPT IN TO SMS NOTIFICATIONS" />
+            <div className="mt-4 space-y-4 text-sm sm:text-base text-slate-700 dark:text-slate-200">
+              <p>
+                To receive SMS notifications from Dupree Ops, LLC — including appointment
+                confirmations, account alerts, and service updates — enter your phone number below.
+              </p>
+
+              {/* Consent notice shown ABOVE submit (required by Twilio & CTIA) */}
+              <div className="rounded-md border border-emerald-300 bg-white/80 dark:border-emerald-800 dark:bg-slate-900/70 p-3 sm:p-4 text-xs sm:text-sm leading-relaxed text-slate-700 dark:text-slate-200">
+                <p className="font-semibold text-emerald-700 dark:text-emerald-400 mb-2">
+                  ▸ Consent &amp; Terms — Please read before submitting
+                </p>
+                <p className="mb-2">
+                  By entering your phone number and clicking <strong>Subscribe to SMS</strong>, you
+                  agree to receive recurring automated text messages from{' '}
+                  <strong>Dupree Ops, LLC</strong> at the number provided. Message types include:
+                  appointment confirmations, account verification codes, security alerts, and
+                  service status updates.
+                </p>
+                <ul className="list-none space-y-1 ml-2 mb-2">
+                  <li>▸ Consent is not a condition of purchase or service.</li>
+                  <li>▸ Message and data rates may apply.</li>
+                  <li>▸ Message frequency varies based on account activity (typically 1–5 per month).</li>
+                  <li>▸ Reply <strong>STOP</strong> at any time to unsubscribe. Reply <strong>HELP</strong> for help.</li>
+                </ul>
+                <p>
+                  By subscribing, you agree to our{' '}
+                  <a href="/terms" className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors underline">
+                    Terms of Service
+                  </a>{' '}
+                  and{' '}
+                  <a href="/privacy" className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors underline">
+                    Privacy Policy
+                  </a>
+                  .
+                </p>
+              </div>
+
+              {/* Opt-in form */}
+              <form
+                onSubmit={(e) => { e.preventDefault(); alert('To subscribe to SMS notifications from Dupree Ops, LLC, please contact support@dupreeops.com with your phone number and we will add you to the list.') }}
+                className="space-y-3"
+              >
+                <div>
+                  <label htmlFor="sms-phone" className="block text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    Mobile phone number (US)
+                  </label>
+                  <input
+                    id="sms-phone"
+                    type="tel"
+                    placeholder="+1 (555) 000-0000"
+                    className="w-full max-w-xs rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:placeholder-slate-500"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-flex items-center rounded-full border border-emerald-600 bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 active:bg-emerald-800 dark:border-emerald-500 dark:bg-emerald-600 dark:hover:bg-emerald-500 transition-colors touch-manipulation min-h-[44px]"
+                >
+                  Subscribe to SMS
+                </button>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  By subscribing, you confirm you have read and agree to the consent notice above.
+                </p>
+              </form>
+            </div>
+          </div>
         </div>
       </main>
     </>
