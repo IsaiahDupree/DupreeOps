@@ -135,11 +135,11 @@ export default function Home() {
 
                 <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-2.5 sm:gap-3">
                   <a
-                    href="mailto:hello@dupreeops.com"
-                    onClick={() => trackEmailClick('hello@dupreeops.com')}
+                    href="/services"
+                    onClick={() => trackLinkClick('/services', 'View Services')}
                     className="inline-flex items-center justify-center rounded-full border border-slate-900 bg-slate-900 px-4 sm:px-5 py-2.5 sm:py-3 text-sm font-medium text-slate-50 shadow-sm active:bg-black hover:bg-black dark:border-slate-100 dark:bg-slate-100 dark:text-slate-900 dark:active:bg-white dark:hover:bg-white transition-colors touch-manipulation min-h-[44px]"
                   >
-                    Send an email
+                    View Services
                   </a>
                     <span className="inline-flex items-center rounded-full border border-emerald-500/70 bg-emerald-50 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-emerald-700 dark:border-emerald-400/70 dark:bg-emerald-900/40 dark:text-emerald-200">
                     Available for select partnerships

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useTheme } from '@/hooks/useTheme'
 import { trackThemeToggle, trackLinkClick, trackEmailClick } from '@/lib/analytics'
+import ContactForm from '@/components/ContactForm'
 
 export default function Contact() {
   const { theme, toggleTheme, mounted } = useTheme()
@@ -50,10 +51,21 @@ export default function Contact() {
             </button>
           </div>
 
+          {/* Contact form section */}
           <div className="rounded-lg border border-slate-200 bg-white/90 p-4 sm:p-5 md:p-6 dark:border-slate-800 dark:bg-slate-900/70">
-            <AsciiHeading label="CONTACT" />
+            <AsciiHeading label="GET IN TOUCH" />
+            <p className="mt-4 text-sm sm:text-base text-slate-700 dark:text-slate-200 mb-4 sm:mb-6">
+              Have a project in mind or want to learn more about our services? Fill out the form below and
+              we'll get back to you within 1-2 business days.
+            </p>
+            <ContactForm />
+          </div>
 
-            <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-5 text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
+          {/* Additional contact methods */}
+          <div className="rounded-lg border border-slate-200 bg-white/90 p-4 sm:p-5 md:p-6 dark:border-slate-800 dark:bg-slate-900/70">
+            <AsciiHeading label="OTHER WAYS TO REACH US" />
+
+            <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-5 text-sm sm:text-base text-slate-700 dark:text-slate-200">
               <div>
                 <p className="text-emerald-700 dark:text-emerald-400 mb-2 font-semibold">
                   &gt;&gt; General & Business Inquiries
