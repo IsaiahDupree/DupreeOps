@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useTheme } from '@/hooks/useTheme'
 import { trackThemeToggle, trackLinkClick } from '@/lib/analytics'
 import { services } from '@/data/services'
+import { testimonials } from '@/data/testimonials'
 
 export default function Services() {
   const { theme, toggleTheme, mounted } = useTheme()
@@ -29,8 +30,35 @@ export default function Services() {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
         />
+
+        {/* SEO Tags */}
+        <meta name="keywords" content="AI automation services, social growth, automation audit, ACTP setup" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Services • Dupree Ops, LLC" />
+        <meta
+          property="og:description"
+          content="Professional services: AI Automation Audit, Social Growth System, and ACTP Setup"
+        />
+        <meta property="og:url" content="https://dupreeops.com/services" />
+        <meta property="og:image" content="https://dupreeops.com/og-image.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Services • Dupree Ops, LLC" />
+        <meta
+          name="twitter:description"
+          content="Professional services: AI Automation Audit, Social Growth System, and ACTP Setup"
+        />
+
+        {/* Theme & Mobile */}
         <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://dupreeops.com/services" />
       </Head>
 
       <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
@@ -67,6 +95,95 @@ export default function Services() {
             {services.map((service) => (
               <ServiceCard key={service.id} service={service} />
             ))}
+          </div>
+
+          {/* Comparison Table */}
+          <div className="rounded-lg border border-slate-200 bg-white/90 p-4 sm:p-5 md:p-6 dark:border-slate-800 dark:bg-slate-900/70">
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">
+              Service Comparison
+            </h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-300 dark:border-slate-700">
+                    <th className="text-left py-3 px-3 font-semibold text-slate-700 dark:text-slate-200">Feature</th>
+                    {services.map((service) => (
+                      <th key={service.id} className="text-left py-3 px-3 font-semibold text-slate-700 dark:text-slate-200">
+                        {service.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-slate-200 dark:border-slate-700">
+                    <td className="py-3 px-3 text-slate-600 dark:text-slate-300">Price</td>
+                    {services.map((service) => (
+                      <td key={service.id} className="py-3 px-3 font-semibold text-emerald-600 dark:text-emerald-400">
+                        {service.price}
+                        {service.billingPeriod === 'monthly' && '/mo'}
+                      </td>
+                    ))}
+                  </tr>
+                  <tr className="border-b border-slate-200 dark:border-slate-700">
+                    <td className="py-3 px-3 text-slate-600 dark:text-slate-300">Type</td>
+                    {services.map((service) => (
+                      <td key={service.id} className="py-3 px-3 text-slate-700 dark:text-slate-200">
+                        {service.billingPeriod === 'monthly' ? 'Ongoing' : 'One-time'}
+                      </td>
+                    ))}
+                  </tr>
+                  <tr className="border-b border-slate-200 dark:border-slate-700">
+                    <td className="py-3 px-3 text-slate-600 dark:text-slate-300">Deliverables</td>
+                    {services.map((service) => (
+                      <td key={service.id} className="py-3 px-3 text-slate-700 dark:text-slate-200">
+                        {service.benefits.length} key benefits
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <td className="py-3 px-3 text-slate-600 dark:text-slate-300">Get Started</td>
+                    {services.map((service) => (
+                      <td key={service.id} className="py-3 px-3">
+                        <a
+                          href={service.ctaLink}
+                          className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 font-medium transition-colors"
+                        >
+                          {service.cta}
+                        </a>
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Testimonials Section */}
+          <div className="rounded-lg border border-slate-200 bg-white/90 p-4 sm:p-5 md:p-6 dark:border-slate-800 dark:bg-slate-900/70">
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">
+              What Our Clients Say
+            </h2>
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
+              {testimonials.map((testimonial) => (
+                <div
+                  key={testimonial.id}
+                  className="p-4 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800"
+                >
+                  <p className="text-sm sm:text-base text-slate-700 dark:text-slate-200 mb-3 italic leading-relaxed">
+                    "{testimonial.text}"
+                  </p>
+                  <div className="pt-3 border-t border-slate-300 dark:border-slate-700">
+                    <p className="font-semibold text-slate-900 dark:text-slate-50 text-sm">
+                      {testimonial.author}
+                    </p>
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                      {testimonial.title}
+                      {testimonial.company && ` at ${testimonial.company}`}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* CTA Section */}

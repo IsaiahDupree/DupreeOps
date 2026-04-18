@@ -1,31 +1,41 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { createServerClient } from '@/lib/supabase'
 import { validateContactForm, type ContactFormData } from '@/lib/validation'
+import { sendError, sendSuccess, handleCorsPreFlight, ApiErrors } from '@/lib/api-utils'
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
 
-interface SuccessResponse {
-  success: true
+interface ContactResponse {
+  success: boolean
   message: string
   id?: string
-}
-
-interface ErrorResponse {
-  success: false
-  message: string
   errors?: Array<{ field: string; message: string }>
 }
 
-type Response = SuccessResponse | ErrorResponse
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response>
+  res: NextApiResponse<ContactResponse>
 ) {
+  // Handle CORS preflight
+  if (handleCorsPreFlight(req, res)) {
+    return
+  }
+
   // Only allow POST requests
   if (req.method !== 'POST') {
-    return res.status(405).json({
-      success: false,
-      message: 'Method not allowed',
-    })
+    const { statusCode, message } = ApiErrors.MethodNotAllowed()
+    return sendError(res, statusCode, message)
+  }
+
+  // Check rate limit
+  const clientIp = getClientIp(req.headers as Record<string, string | string[]>)
+  const rateLimit = checkRateLimit(clientIp, 'contact')
+
+  if (!rateLimit.allowed) {
+    const { statusCode, message } = ApiErrors.TooManyRequests(
+      'Too many requests. Please try again later.'
+    )
+    res.setHeader('Retry-After', Math.ceil((rateLimit.resetAt - Date.now()) / 1000))
+    return sendError(res, statusCode, message)
   }
 
   try {
@@ -36,9 +46,10 @@ export default async function handler(
     const validationErrors = validateContactForm(formData)
 
     if (validationErrors.length > 0) {
-      return res.status(400).json({
+      const { statusCode, message: errorMsg } = ApiErrors.BadRequest('Validation failed')
+      return res.status(statusCode).json({
         success: false,
-        message: 'Validation failed',
+        message: errorMsg,
         errors: validationErrors,
       })
     }
@@ -59,22 +70,14 @@ export default async function handler(
 
     if (error) {
       console.error('Supabase error:', error)
-      return res.status(500).json({
-        success: false,
-        message: 'Failed to save submission. Please try again later.',
-      })
+      const { statusCode, message: errorMsg } = ApiErrors.ServerError()
+      return sendError(res, statusCode, 'Failed to save submission. Please try again later.', error)
     }
 
-    return res.status(200).json({
-      success: true,
-      message: 'Contact form submitted successfully',
-      id: data?.id,
-    })
+    return sendSuccess(res, { id: data?.id }, 'Contact form submitted successfully')
   } catch (error) {
     console.error('Contact API error:', error)
-    return res.status(500).json({
-      success: false,
-      message: 'An unexpected error occurred. Please try again later.',
-    })
+    const { statusCode, message: errorMsg } = ApiErrors.ServerError()
+    return sendError(res, statusCode, 'An unexpected error occurred. Please try again later.', error)
   }
 }

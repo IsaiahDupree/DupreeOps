@@ -26,8 +26,29 @@ export default function Contact() {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
         />
+
+        {/* SEO Tags */}
+        <meta name="keywords" content="contact, support, partnership, business inquiry" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Contact • Dupree Ops, LLC" />
+        <meta property="og:description" content="Contact Dupree Ops, LLC for support, partnerships, or verification." />
+        <meta property="og:url" content="https://dupreeops.com/contact" />
+        <meta property="og:image" content="https://dupreeops.com/og-image.jpg" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact • Dupree Ops, LLC" />
+        <meta name="twitter:description" content="Contact Dupree Ops, LLC for support, partnerships, or verification." />
+
+        {/* Theme & Mobile */}
         <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://dupreeops.com/contact" />
       </Head>
 
       <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">

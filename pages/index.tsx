@@ -71,10 +71,41 @@ export default function Home() {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
         />
+
+        {/* SEO Tags */}
+        <meta name="keywords" content="AI automation, software products, business studio, digital transformation" />
+        <meta name="author" content="Dupree Ops, LLC" />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="English" />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Dupree Ops, LLC • Official Business Site" />
+        <meta
+          property="og:description"
+          content="Official business website for Dupree Ops, LLC – operator of software, AI, and automation products."
+        />
+        <meta property="og:url" content="https://dupreeops.com" />
+        <meta property="og:image" content="https://dupreeops.com/og-image.jpg" />
+        <meta property="og:image:alt" content="Dupree Ops, LLC" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Dupree Ops, LLC • Official Business Site" />
+        <meta
+          name="twitter:description"
+          content="Official business website for Dupree Ops, LLC – operator of software, AI, and automation products."
+        />
+        <meta name="twitter:image" content="https://dupreeops.com/og-image.jpg" />
+
+        {/* Theme & Mobile */}
         <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://dupreeops.com" />
       </Head>
 
       <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
