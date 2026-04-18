@@ -102,17 +102,17 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5" aria-label="Contact form">
       {/* Form-level error */}
       {errors.form && (
-        <div className="rounded-lg border border-red-200 bg-red-50/80 p-3 sm:p-4 dark:border-red-900/50 dark:bg-red-950/30">
+        <div className="rounded-lg border border-red-200 bg-red-50/80 p-3 sm:p-4 dark:border-red-900/50 dark:bg-red-950/30" role="alert">
           <p className="text-sm text-red-700 dark:text-red-400">{errors.form}</p>
         </div>
       )}
 
       {/* Success message */}
       {submitStatus === 'success' && (
-        <div className="rounded-lg border border-emerald-200 bg-emerald-50/80 p-3 sm:p-4 dark:border-emerald-900/50 dark:bg-emerald-950/30">
+        <div className="rounded-lg border border-emerald-200 bg-emerald-50/80 p-3 sm:p-4 dark:border-emerald-900/50 dark:bg-emerald-950/30" role="status" aria-live="polite">
           <p className="text-sm text-emerald-700 dark:text-emerald-400">{successMessage}</p>
         </div>
       )}
@@ -120,7 +120,7 @@ export default function ContactForm() {
       {/* Name field */}
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
-          Name
+          Name <span className="text-red-500" aria-label="required">*</span>
         </label>
         <input
           type="text"
@@ -129,20 +129,22 @@ export default function ContactForm() {
           value={formState.name}
           onChange={handleChange}
           disabled={isLoading}
-          className={`w-full rounded-lg border px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-slate-900 transition-colors min-h-[44px] ${
+          required
+          aria-describedby={errors.name ? 'name-error' : undefined}
+          className={`w-full rounded-lg border px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-slate-900 transition-colors min-h-[44px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 dark:focus:ring-offset-slate-950 ${
             errors.name
               ? 'border-red-300 dark:border-red-700'
               : 'border-slate-300 dark:border-slate-700'
           } text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 disabled:opacity-50`}
           placeholder="Your name"
         />
-        {errors.name && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>}
+        {errors.name && <p id="name-error" className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">{errors.name}</p>}
       </div>
 
       {/* Email field */}
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
-          Email
+          Email <span className="text-red-500" aria-label="required">*</span>
         </label>
         <input
           type="email"
@@ -151,20 +153,22 @@ export default function ContactForm() {
           value={formState.email}
           onChange={handleChange}
           disabled={isLoading}
-          className={`w-full rounded-lg border px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-slate-900 transition-colors min-h-[44px] ${
+          required
+          aria-describedby={errors.email ? 'email-error' : undefined}
+          className={`w-full rounded-lg border px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-slate-900 transition-colors min-h-[44px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 dark:focus:ring-offset-slate-950 ${
             errors.email
               ? 'border-red-300 dark:border-red-700'
               : 'border-slate-300 dark:border-slate-700'
           } text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 disabled:opacity-50`}
           placeholder="your@email.com"
         />
-        {errors.email && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>}
+        {errors.email && <p id="email-error" className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">{errors.email}</p>}
       </div>
 
       {/* Message field */}
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
-          Message
+          Message <span className="text-red-500" aria-label="required">*</span>
         </label>
         <textarea
           id="message"
@@ -172,22 +176,25 @@ export default function ContactForm() {
           value={formState.message}
           onChange={handleChange}
           disabled={isLoading}
+          required
           rows={6}
-          className={`w-full rounded-lg border px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-slate-900 transition-colors ${
+          aria-describedby={errors.message ? 'message-error' : undefined}
+          className={`w-full rounded-lg border px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-slate-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 dark:focus:ring-offset-slate-950 ${
             errors.message
               ? 'border-red-300 dark:border-red-700'
               : 'border-slate-300 dark:border-slate-700'
           } text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 disabled:opacity-50 resize-none`}
           placeholder="Tell us about your project..."
         />
-        {errors.message && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message}</p>}
+        {errors.message && <p id="message-error" className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">{errors.message}</p>}
       </div>
 
       {/* Submit button */}
       <button
         type="submit"
         disabled={isLoading || submitStatus === 'success'}
-        className="inline-flex items-center justify-center rounded-lg border border-slate-900 bg-slate-900 px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-medium text-white shadow-sm active:bg-black hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed dark:border-slate-100 dark:bg-slate-100 dark:text-slate-900 dark:active:bg-white dark:hover:bg-white transition-colors touch-manipulation min-h-[44px]"
+        aria-busy={isLoading}
+        className="inline-flex items-center justify-center rounded-lg border border-slate-900 bg-slate-900 px-5 sm:px-6 py-2.5 sm:py-3 text-sm font-medium text-white shadow-sm active:bg-black hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed dark:border-slate-100 dark:bg-slate-100 dark:text-slate-900 dark:active:bg-white dark:hover:bg-white transition-colors touch-manipulation min-h-[44px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 dark:focus:ring-slate-100 dark:focus:ring-offset-slate-950"
       >
         {isLoading ? 'Sending...' : 'Send Message'}
       </button>

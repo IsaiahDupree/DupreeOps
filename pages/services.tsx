@@ -75,9 +75,10 @@ export default function Services() {
             <button
               type="button"
               onClick={handleThemeToggle}
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-800 shadow-sm active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[44px]"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-800 shadow-sm active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[44px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 dark:focus:ring-slate-100 dark:focus:ring-offset-slate-950"
             >
-              <span className="text-xs">{theme === 'dark' ? '🌙' : '☀️'}</span>
+              <span className="text-xs" aria-hidden="true">{theme === 'dark' ? '🌙' : '☀️'}</span>
               <span>{theme === 'dark' ? 'Dark mode' : 'Light mode'}</span>
             </button>
           </div>
@@ -269,7 +270,11 @@ function ServiceCard({ service }: ServiceCardProps) {
 function AsciiHeading({ label }: { label: string }) {
   const line = '═'.repeat(Math.max(label.length + 4, 28))
   return (
-    <pre className="text-xs md:text-sm leading-snug text-emerald-700 dark:text-emerald-400 whitespace-pre font-mono">
+    <pre
+      className="text-xs md:text-sm leading-snug text-emerald-700 dark:text-emerald-400 whitespace-pre font-mono"
+      role="heading"
+      aria-level={2}
+    >
 {`╔${line}╗
 ║ ${label.padEnd(line.length - 2, ' ')}║
 ╚${line}╝`}
