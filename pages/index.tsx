@@ -79,6 +79,35 @@ export default function Home() {
 
       <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-10 space-y-6 sm:space-y-8 md:space-y-10">
+          {/* Navigation bar */}
+          <nav className="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
+              <a
+                href="/"
+                onClick={() => trackLinkClick('/', 'Home')}
+                className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors font-medium"
+              >
+                Home
+              </a>
+              <span className="text-slate-400">•</span>
+              <a
+                href="/services"
+                onClick={() => trackLinkClick('/services', 'Services')}
+                className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors font-medium"
+              >
+                Services
+              </a>
+              <span className="text-slate-400">•</span>
+              <a
+                href="/contact"
+                onClick={() => trackLinkClick('/contact', 'Contact')}
+                className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors font-medium"
+              >
+                Contact
+              </a>
+            </div>
+          </nav>
+
           {/* TOP BAR: title + theme toggle + time */}
           <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
             <div className="flex-1 min-w-0">
