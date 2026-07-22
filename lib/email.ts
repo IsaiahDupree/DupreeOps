@@ -38,7 +38,10 @@ export async function sendLeadNotification(lead: LeadNotification): Promise<Emai
   const apiKey = process.env.RESEND_API_KEY
   const from = process.env.CONTACT_FROM_EMAIL || 'DupreeOps <notifications@everreach.app>'
   const to = process.env.CONTACT_NOTIFY_EMAIL
-  const replyTo = process.env.CONTACT_REPLY_TO || 'hello@dupreeops.com'
+  // Reply-To is the prospect's own address so hitting "Reply" on the notification
+  // emails them directly. Do NOT use hello@dupreeops.com here — it forwards back to
+  // this same inbox via ForwardEmail, which would loop replies to yourself.
+  const replyTo = lead.email
 
   // Fail soft: if email isn't configured, skip silently so the form still succeeds.
   if (!apiKey || !to) {
