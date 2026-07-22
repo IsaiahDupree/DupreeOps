@@ -3,6 +3,7 @@ import { createServerClient } from '@/lib/supabase'
 import { validateContactForm, type ContactFormData } from '@/lib/validation'
 import { sendError, sendSuccess, handleCorsPreFlight, ApiErrors } from '@/lib/api-utils'
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit'
+import { sendLeadNotification } from '@/lib/email'
 
 interface ContactResponse {
   success: boolean
@@ -72,6 +73,18 @@ export default async function handler(
       console.error('Supabase error:', error)
       const { statusCode, message: errorMsg } = ApiErrors.ServerError()
       return sendError(res, statusCode, 'Failed to save submission. Please try again later.', error)
+    }
+
+    // Best-effort lead notification. The Supabase row above is the source of truth;
+    // an email failure must NOT fail the submission, so we never throw from here.
+    const emailResult = await sendLeadNotification({
+      name,
+      email,
+      message,
+      submissionId: data?.id,
+    })
+    if (!emailResult.sent) {
+      console.error('Lead notification email not sent:', emailResult.error)
     }
 
     return sendSuccess(res, { id: data?.id }, 'Contact form submitted successfully')
