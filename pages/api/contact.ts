@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { randomUUID } from 'crypto'
 import { createServerClient } from '@/lib/supabase'
 import { validateContactForm, type ContactFormData } from '@/lib/validation'
 import { sendError, sendSuccess, handleCorsPreFlight, ApiErrors } from '@/lib/api-utils'
@@ -55,19 +56,21 @@ export default async function handler(
       })
     }
 
-    // Create server client and insert into database
+    // Create server client and insert into database.
+    // We generate the id client-side and use return=minimal (no .select()) so the
+    // insert works under the anon "Allow anonymous insert" RLS policy — anon has an
+    // INSERT policy but intentionally no SELECT policy, so a RETURNING clause would
+    // trip RLS. The service-role key (when configured) bypasses this either way.
     const supabase = createServerClient()
+    const id = randomUUID()
 
-    const { data, error } = await supabase
-      .from('contact_submissions')
-      .insert({
-        name,
-        email,
-        message,
-        created_at: new Date().toISOString(),
-      })
-      .select('id')
-      .single()
+    const { error } = await supabase.from('contact_submissions').insert({
+      id,
+      name,
+      email,
+      message,
+      created_at: new Date().toISOString(),
+    })
 
     if (error) {
       console.error('Supabase error:', error)
@@ -81,13 +84,13 @@ export default async function handler(
       name,
       email,
       message,
-      submissionId: data?.id,
+      submissionId: id,
     })
     if (!emailResult.sent) {
       console.error('Lead notification email not sent:', emailResult.error)
     }
 
-    return sendSuccess(res, { id: data?.id }, 'Contact form submitted successfully')
+    return sendSuccess(res, { id }, 'Contact form submitted successfully')
   } catch (error) {
     console.error('Contact API error:', error)
     const { statusCode, message: errorMsg } = ApiErrors.ServerError()
