@@ -21,7 +21,7 @@ export default function TikTokDemoPage() {
     const redirectUri = `${window.location.origin}/api/tiktok/callback`
     const params = new URLSearchParams({
       client_key: CLIENT_KEY,
-      scope: 'user.info.basic',
+      scope: 'user.info.basic,video.publish',
       response_type: 'code',
       redirect_uri: redirectUri,
       state,

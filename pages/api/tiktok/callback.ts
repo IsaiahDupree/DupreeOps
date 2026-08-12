@@ -102,6 +102,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const userData = await userResp.json()
     const user = userData?.data?.user || {}
 
+    const scopes = String(tokenData.scope || '')
+    const canPublish = scopes.split(',').map((s) => s.trim()).includes('video.publish')
+
+    res.setHeader('Set-Cookie', [
+      `tiktok_access_token=${accessToken}; Path=/; Max-Age=600; HttpOnly; Secure; SameSite=Lax`,
+    ])
+
     res.status(200).send(
       htmlPage(
         'TikTok Login — Success',
@@ -112,6 +119,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         <p style="color:#888;font-size:13px">open_id: ${user.open_id || tokenData.open_id || 'n/a'}</p>
         <p style="color:#888;font-size:13px">scope granted: ${tokenData.scope}</p>
         <p style="color:#888;font-size:12px">${new Date().toISOString()}</p>
+        ${
+          canPublish
+            ? `<form method="POST" action="/api/tiktok/publish" style="margin-top:24px">
+                 <button type="submit" style="background:#fff;color:#000;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:600;cursor:pointer">
+                   Post test video (private)
+                 </button>
+               </form>`
+            : ''
+        }
         `,
         true
       )
