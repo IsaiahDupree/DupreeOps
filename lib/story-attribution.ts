@@ -8,6 +8,7 @@ interface StoryAttribution {
   slug: string
   storyId: string
   creativeId: string
+  measurementToken: string
   landingPath: string
 }
 
@@ -49,17 +50,31 @@ export function parseStoryAttribution(
   const slug = requiredAttributionValue(url.searchParams.get('story_redirect'))
   const storyId = requiredAttributionValue(url.searchParams.get('utm_content'))
   const creativeId = requiredAttributionValue(url.searchParams.get('story_creative'))
+  const measurementToken = url.searchParams.get('story_measure')
 
-  if (!slug || !storyId || !creativeId) return null
+  if (
+    !slug ||
+    !storyId ||
+    !creativeId ||
+    !measurementToken ||
+    !/^[0-9a-f]{64}$/.test(measurementToken)
+  ) {
+    return null
+  }
 
   return {
     slug,
     storyId,
     creativeId,
-    // Deliberately exclude the query string, hash, and referrer. The Story IDs
-    // above are the only campaign context the measurement endpoint receives.
+    measurementToken,
+    // Deliberately exclude the query string, hash, and referrer. The explicit
+    // attribution fields above are the only campaign context sent.
     landingPath: url.pathname,
   }
+}
+
+export function redactStoryMeasurementToken(path: string): string {
+  return path.replace(/([?&]story_measure=)[^&#]*/gi, '$1[redacted]')
 }
 
 function attributionStorageKey(attribution: StoryAttribution): string {
@@ -107,6 +122,7 @@ async function postStoryPageView(
         slug: attribution.slug,
         story_id: attribution.storyId,
         creative_id: attribution.creativeId,
+        measurement_token: attribution.measurementToken,
         visit_id: visitId,
         landing_path: attribution.landingPath,
       }),

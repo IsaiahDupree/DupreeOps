@@ -1,4 +1,7 @@
-import { trackStoryPageView } from './story-attribution'
+import {
+  redactStoryMeasurementToken,
+  trackStoryPageView,
+} from './story-attribution'
 
 // Lightweight UI event tracking. Story landing-page attribution is delivered
 // through the real Airtime endpoint in trackPageView below.
@@ -31,7 +34,7 @@ export function trackEvent(eventName: EventName, data?: EventData) {
 // Track page views
 export function trackPageView(path: string) {
   trackEvent('page_view', {
-    path,
+    path: redactStoryMeasurementToken(path),
     title: document.title,
   })
 

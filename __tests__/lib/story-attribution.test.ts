@@ -16,6 +16,10 @@ interface ReceivedRequest {
 }
 
 const receivedRequests: ReceivedRequest[] = []
+const MEASUREMENT_TOKEN_A = 'a'.repeat(64)
+const MEASUREMENT_TOKEN_B = 'b'.repeat(64)
+const MEASUREMENT_TOKEN_C = 'c'.repeat(64)
+const MEASUREMENT_TOKEN_D = 'd'.repeat(64)
 let responseBodies: Array<Record<string, unknown>> = []
 let responseStatuses: number[] = []
 let server: Server
@@ -115,16 +119,19 @@ afterEach(() => {
 
 describe('Story landing-page attribution', () => {
   it('parses only complete attribution and excludes query data from landing_path', async () => {
-    const { parseStoryAttribution } = await import('@/lib/story-attribution')
+    const { parseStoryAttribution, redactStoryMeasurementToken } = await import(
+      '@/lib/story-attribution'
+    )
 
     expect(
       parseStoryAttribution(
-        '/services?story_redirect=ai-audit&utm_content=story-42&story_creative=creative-9&email=private%40example.com#pricing'
+        `/services?story_redirect=ai-audit&utm_content=story-42&story_creative=creative-9&story_measure=${MEASUREMENT_TOKEN_A}&email=private%40example.com#pricing`
       )
     ).toEqual({
       slug: 'ai-audit',
       storyId: 'story-42',
       creativeId: 'creative-9',
+      measurementToken: MEASUREMENT_TOKEN_A,
       landingPath: '/services',
     })
 
@@ -133,15 +140,25 @@ describe('Story landing-page attribution', () => {
     ).toBeNull()
     expect(
       parseStoryAttribution(
-        'https://example.com/private?story_redirect=ai-audit&utm_content=story-42&story_creative=creative-9'
+        `https://example.com/private?story_redirect=ai-audit&utm_content=story-42&story_creative=creative-9&story_measure=${MEASUREMENT_TOKEN_A}`
       )
     ).toBeNull()
+    expect(
+      parseStoryAttribution(
+        `/services?story_redirect=ai-audit&utm_content=story-42&story_creative=creative-9&story_measure=${'A'.repeat(64)}`
+      )
+    ).toBeNull()
+    expect(
+      redactStoryMeasurementToken(
+        `/services?story_measure=${MEASUREMENT_TOKEN_A}&utm_content=story-42`
+      )
+    ).toBe('/services?story_measure=[redacted]&utm_content=story-42')
   })
 
   it('sends one real HTTP request for a complete Story landing and no PII/referrer', async () => {
     const { trackStoryPageView } = await import('@/lib/story-attribution')
     const path =
-      '/services?story_redirect=ai-audit&utm_content=story-42&story_creative=creative-9&email=private%40example.com'
+      `/services?story_redirect=ai-audit&utm_content=story-42&story_creative=creative-9&story_measure=${MEASUREMENT_TOKEN_A}&email=private%40example.com`
 
     const [firstResult, concurrentResult] = await Promise.all([
       trackStoryPageView(path),
@@ -156,6 +173,7 @@ describe('Story landing-page attribution', () => {
       slug: 'ai-audit',
       story_id: 'story-42',
       creative_id: 'creative-9',
+      measurement_token: MEASUREMENT_TOKEN_A,
       visit_id: expect.stringMatching(
         /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
       ),
@@ -165,12 +183,22 @@ describe('Story landing-page attribution', () => {
     expect(receivedRequests[0].body).not.toHaveProperty('referrer')
     expect(receivedRequests[0].headers.cookie).toBeUndefined()
     expect(receivedRequests[0].headers.authorization).toBeUndefined()
+    const storageKeys = Array.from(
+      { length: window.sessionStorage.length },
+      (_, index) => window.sessionStorage.key(index)
+    )
+    expect(storageKeys.join(':')).not.toContain(MEASUREMENT_TOKEN_A)
   })
 
   it('does not request the endpoint for an ordinary page view', async () => {
     const { trackStoryPageView } = await import('@/lib/story-attribution')
 
     await expect(trackStoryPageView('/services?utm_source=instagram')).resolves.toBe(false)
+    await expect(
+      trackStoryPageView(
+        '/services?story_redirect=unsigned&utm_content=story-unsigned&story_creative=creative-unsigned'
+      )
+    ).resolves.toBe(false)
     expect(receivedRequests).toHaveLength(0)
   })
 
@@ -178,7 +206,7 @@ describe('Story landing-page attribution', () => {
     const { trackPageView } = await import('@/lib/analytics')
 
     trackPageView(
-      '/services?story_redirect=analytics-hook&utm_content=story-hook&story_creative=creative-hook'
+      `/services?story_redirect=analytics-hook&utm_content=story-hook&story_creative=creative-hook&story_measure=${MEASUREMENT_TOKEN_B}`
     )
     await waitForReceivedRequestCount(1)
 
@@ -187,6 +215,7 @@ describe('Story landing-page attribution', () => {
       slug: 'analytics-hook',
       story_id: 'story-hook',
       creative_id: 'creative-hook',
+      measurement_token: MEASUREMENT_TOKEN_B,
       landing_path: '/services',
     })
   })
@@ -194,7 +223,7 @@ describe('Story landing-page attribution', () => {
   it('retries an unconfirmed response with the same visit ID and accepts a duplicate', async () => {
     const { trackStoryPageView } = await import('@/lib/story-attribution')
     const path =
-      '/contact?story_redirect=ai-audit-retry&utm_content=story-retry&story_creative=creative-retry'
+      `/contact?story_redirect=ai-audit-retry&utm_content=story-retry&story_creative=creative-retry&story_measure=${MEASUREMENT_TOKEN_C}`
     responseBodies = [{ ok: true }, { ok: true, duplicate: true }]
 
     await expect(trackStoryPageView(path)).resolves.toBe(false)
@@ -208,7 +237,7 @@ describe('Story landing-page attribution', () => {
   it('does not mark a non-2xx recorded response as sent', async () => {
     const { trackStoryPageView } = await import('@/lib/story-attribution')
     const path =
-      '/?story_redirect=ai-audit-status&utm_content=story-status&story_creative=creative-status'
+      `/?story_redirect=ai-audit-status&utm_content=story-status&story_creative=creative-status&story_measure=${MEASUREMENT_TOKEN_D}`
     responseStatuses = [503]
     responseBodies = [{ recorded: true }, { recorded: true }]
 
