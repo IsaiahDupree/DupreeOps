@@ -1,5 +1,7 @@
-// Simple analytics tracking utility
-// You can replace this with Google Analytics, Plausible, or any other analytics service
+import { trackStoryPageView } from './story-attribution'
+
+// Lightweight UI event tracking. Story landing-page attribution is delivered
+// through the real Airtime endpoint in trackPageView below.
 
 type EventName = 
   | 'page_view'
@@ -24,32 +26,6 @@ export function trackEvent(eventName: EventName, data?: EventData) {
     console.log('[Analytics]', eventName, data || '')
   }
 
-  // You can integrate with analytics services here:
-  // - Google Analytics: gtag('event', eventName, data)
-  // - Plausible: plausible(eventName, { props: data })
-  // - PostHog: posthog.capture(eventName, data)
-  // - Custom endpoint: fetch('/api/analytics', { method: 'POST', body: JSON.stringify({ eventName, data }) })
-
-  // Example: Send to a custom endpoint
-  try {
-    // Uncomment and configure your analytics endpoint:
-    // fetch('/api/analytics', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     event: eventName,
-    //     data: data || {},
-    //     timestamp: new Date().toISOString(),
-    //     url: window.location.href,
-    //     path: window.location.pathname,
-    //   }),
-    // })
-  } catch (error) {
-    // Silently fail in production
-    if (process.env.NODE_ENV === 'development') {
-      console.error('[Analytics Error]', error)
-    }
-  }
 }
 
 // Track page views
@@ -58,6 +34,8 @@ export function trackPageView(path: string) {
     path,
     title: document.title,
   })
+
+  void trackStoryPageView(path)
 }
 
 // Track link clicks
@@ -89,4 +67,3 @@ export function trackProductClick(productName: string, url: string) {
     url,
   })
 }
-
