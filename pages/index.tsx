@@ -102,6 +102,14 @@ export default function Home() {
               </a>
               <span className="text-slate-400">•</span>
               <a
+                href="/links"
+                onClick={() => trackLinkClick('/links', 'All Links')}
+                className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors font-medium"
+              >
+                All Links
+              </a>
+              <span className="text-slate-400">•</span>
+              <a
                 href="/isaiah-dupree"
                 onClick={() => trackLinkClick('/isaiah-dupree', 'About Isaiah')}
                 className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors font-medium"
