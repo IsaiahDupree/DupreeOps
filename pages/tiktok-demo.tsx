@@ -43,6 +43,7 @@ export default function TikTokDemoPage() {
     >
       <Head>
         <title>Dupree Ops — TikTok Login Kit Demo</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
       <div style={{ textAlign: 'center', maxWidth: 420, padding: 24 }}>
         <h1 style={{ fontSize: 24, marginBottom: 8 }}>Dupree Ops, LLC</h1>

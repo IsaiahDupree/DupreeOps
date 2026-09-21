@@ -1,7 +1,8 @@
-import Head from 'next/head'
 import { useEffect, useState } from 'react'
+import SeoHead from '@/components/SeoHead'
 import { useTheme } from '@/hooks/useTheme'
 import { trackThemeToggle, trackLinkClick, trackEmailClick, trackProductClick } from '@/lib/analytics'
+import { dupreeOpsSchema, dupreeOpsWebsiteSchema, isaiahDupreeSchema } from '@/lib/seo'
 
 const products = [
   {
@@ -24,10 +25,20 @@ const products = [
     description: 'Turn YouTube videos into quizzes so users actually remember what they watch.',
     url: 'https://ytquizzes.com',
   },
+  {
+    name: 'ResearchForge',
+    description: 'Tested engineering calculators, source-backed articles, and reproduced research.',
+    url: 'https://www.researchforge.app',
+  },
+  {
+    name: 'Strategy Thread',
+    description: 'Source-attributed research on AI automation, SaaS growth, and creator systems.',
+    url: 'https://www.strategythread.app',
+  },
 ]
 
 export default function Home() {
-  const { theme, toggleTheme, mounted } = useTheme()
+  const { theme, toggleTheme } = useTheme()
   const [timeString, setTimeString] = useState<string>('')
 
   // Simple live clock in user's local time (ET for you)
@@ -54,59 +65,20 @@ export default function Home() {
     trackThemeToggle(newTheme)
   }
 
-  // Don't render until mounted to avoid hydration mismatch
-  if (!mounted) {
-    return null
-  }
-
   return (
     <>
-      <Head>
-        <title>Dupree Ops, LLC • Official Business Site</title>
-        <meta
-          name="description"
-          content="Official business website for Dupree Ops, LLC – operator of software, AI, and automation products."
-        />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
-        />
-
-        {/* SEO Tags */}
-        <meta name="keywords" content="AI automation, software products, business studio, digital transformation" />
-        <meta name="author" content="Dupree Ops, LLC" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="English" />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Dupree Ops, LLC • Official Business Site" />
-        <meta
-          property="og:description"
-          content="Official business website for Dupree Ops, LLC – operator of software, AI, and automation products."
-        />
-        <meta property="og:url" content="https://dupreeops.com" />
-        <meta property="og:image" content="https://dupreeops.com/og-image.jpg" />
-        <meta property="og:image:alt" content="Dupree Ops, LLC" />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Dupree Ops, LLC • Official Business Site" />
-        <meta
-          name="twitter:description"
-          content="Official business website for Dupree Ops, LLC – operator of software, AI, and automation products."
-        />
-        <meta name="twitter:image" content="https://dupreeops.com/og-image.jpg" />
-
-        {/* Theme & Mobile */}
-        <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-        {/* Canonical */}
-        <link rel="canonical" href="https://dupreeops.com" />
-      </Head>
+      <SeoHead
+        title="Isaiah Dupree | AI Automation Engineer & Dupree Ops Founder"
+        description="Isaiah Dupree is an aerospace engineer, software builder, and founder of Dupree Ops, LLC, creating AI automation systems and practical software products."
+        keywords={[
+          'Isaiah Dupree',
+          'Dupree Ops',
+          'AI automation engineer',
+          'software founder',
+          'aerospace engineer',
+        ]}
+        jsonLd={[isaiahDupreeSchema, dupreeOpsSchema, dupreeOpsWebsiteSchema]}
+      />
 
       <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-10 space-y-6 sm:space-y-8 md:space-y-10">
@@ -127,6 +99,14 @@ export default function Home() {
                 className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors font-medium"
               >
                 Services
+              </a>
+              <span className="text-slate-400">•</span>
+              <a
+                href="/isaiah-dupree"
+                onClick={() => trackLinkClick('/isaiah-dupree', 'About Isaiah')}
+                className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors font-medium"
+              >
+                About Isaiah
               </a>
               <span className="text-slate-400">•</span>
               <a
@@ -227,10 +207,10 @@ export default function Home() {
                   </p>
                   <div className="flex flex-wrap gap-2 sm:gap-2.5">
                     <a
-                      href="https://x.com/isaiahdupree33"
+                      href="https://x.com/isaiah_dupree"
                       target="_blank"
                       rel="noreferrer"
-                      onClick={() => trackLinkClick('https://x.com/isaiahdupree33', 'Twitter / X')}
+                      onClick={() => trackLinkClick('https://x.com/isaiah_dupree', 'Twitter / X')}
                       className="inline-flex items-center rounded-full border border-slate-300 px-3 sm:px-3.5 py-2 sm:py-2 text-xs sm:text-sm text-slate-700 active:bg-slate-100 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:active:bg-slate-800 dark:hover:bg-slate-800 transition-colors touch-manipulation min-h-[40px]"
                     >
                       Twitter / X

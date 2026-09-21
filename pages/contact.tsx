@@ -1,11 +1,11 @@
-import Head from 'next/head'
 import Link from 'next/link'
+import SeoHead from '@/components/SeoHead'
 import { useTheme } from '@/hooks/useTheme'
 import { trackThemeToggle, trackLinkClick, trackEmailClick } from '@/lib/analytics'
 import ContactForm from '@/components/ContactForm'
 
 export default function Contact() {
-  const { theme, toggleTheme, mounted } = useTheme()
+  const { theme, toggleTheme } = useTheme()
 
   const handleThemeToggle = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
@@ -13,43 +13,14 @@ export default function Contact() {
     trackThemeToggle(newTheme)
   }
 
-  if (!mounted) {
-    return null
-  }
-
   return (
     <>
-      <Head>
-        <title>Contact • Dupree Ops, LLC</title>
-        <meta name="description" content="Contact Dupree Ops, LLC for support, partnerships, or verification." />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
-        />
-
-        {/* SEO Tags */}
-        <meta name="keywords" content="contact, support, partnership, business inquiry" />
-        <meta name="robots" content="index, follow" />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Contact • Dupree Ops, LLC" />
-        <meta property="og:description" content="Contact Dupree Ops, LLC for support, partnerships, or verification." />
-        <meta property="og:url" content="https://dupreeops.com/contact" />
-        <meta property="og:image" content="https://dupreeops.com/og-image.jpg" />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Contact • Dupree Ops, LLC" />
-        <meta name="twitter:description" content="Contact Dupree Ops, LLC for support, partnerships, or verification." />
-
-        {/* Theme & Mobile */}
-        <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
-
-        {/* Canonical */}
-        <link rel="canonical" href="https://dupreeops.com/contact" />
-      </Head>
+      <SeoHead
+        title="Contact Isaiah Dupree & Dupree Ops, LLC"
+        description="Contact Isaiah Dupree and Dupree Ops, LLC about AI automation projects, partnerships, product support, and business verification."
+        path="/contact"
+        keywords={['contact Isaiah Dupree', 'Dupree Ops contact', 'AI automation partnership']}
+      />
 
       <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-10 space-y-4 sm:space-y-6">
@@ -144,10 +115,10 @@ export default function Contact() {
                 </p>
                 <div className="flex flex-wrap gap-3 mt-1">
                   <a
-                    href="https://x.com/isaiahdupree33"
+                    href="https://x.com/isaiah_dupree"
                     target="_blank"
                     rel="noreferrer"
-                    onClick={() => trackLinkClick('https://x.com/isaiahdupree33', 'Twitter / X')}
+                    onClick={() => trackLinkClick('https://x.com/isaiah_dupree', 'Twitter / X')}
                     aria-label="Twitter / X (opens in new window)"
                     className="text-emerald-700 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors focus:outline-none focus:underline"
                   >

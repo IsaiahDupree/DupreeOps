@@ -1,11 +1,8 @@
-# Allow all crawlers to index the site
 User-agent: *
 Allow: /
-Disallow: /.next/
 Disallow: /__nextjs_original-stack-*
+Disallow: /admin/
+Disallow: /api/
+Disallow: /tiktok-demo
 
-# Sitemap location
-Sitemap: https://dupreeops.com/sitemap.xml
-
-# Crawl delay (optional, in seconds)
-Crawl-delay: 1
+Sitemap: https://www.dupreeops.com/sitemap.xml

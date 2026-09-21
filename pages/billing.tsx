@@ -1,10 +1,10 @@
-import Head from 'next/head'
 import Link from 'next/link'
+import SeoHead from '@/components/SeoHead'
 import { useTheme } from '@/hooks/useTheme'
 import { trackThemeToggle, trackLinkClick, trackEmailClick } from '@/lib/analytics'
 
 export default function Billing() {
-  const { theme, toggleTheme, mounted } = useTheme()
+  const { theme, toggleTheme } = useTheme()
 
   const handleThemeToggle = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
@@ -12,23 +12,13 @@ export default function Billing() {
     trackThemeToggle(newTheme)
   }
 
-  // Don't render until mounted to avoid hydration mismatch
-  if (!mounted) {
-    return null
-  }
-
   return (
     <>
-      <Head>
-        <title>Billing & Messaging Policy • Dupree Ops, LLC</title>
-        <meta name="description" content="Billing and Messaging Policy for Dupree Ops, LLC and its products." />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
-        />
-        <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
-      </Head>
+      <SeoHead
+        title="Billing & Messaging Policy | Dupree Ops, LLC"
+        description="Billing, subscription, refund, and messaging practices for Dupree Ops, LLC products and services."
+        path="/billing"
+      />
 
       <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-10 space-y-4 sm:space-y-6">

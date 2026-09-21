@@ -1,12 +1,12 @@
-import Head from 'next/head'
 import Link from 'next/link'
+import SeoHead from '@/components/SeoHead'
 import { useTheme } from '@/hooks/useTheme'
 import { trackThemeToggle, trackLinkClick } from '@/lib/analytics'
 import { services } from '@/data/services'
 import { testimonials } from '@/data/testimonials'
 
 export default function Services() {
-  const { theme, toggleTheme, mounted } = useTheme()
+  const { theme, toggleTheme } = useTheme()
 
   const handleThemeToggle = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
@@ -14,52 +14,14 @@ export default function Services() {
     trackThemeToggle(newTheme)
   }
 
-  if (!mounted) {
-    return null
-  }
-
   return (
     <>
-      <Head>
-        <title>Services • Dupree Ops, LLC</title>
-        <meta
-          name="description"
-          content="Professional services: AI Automation Audit, Social Growth System, and ACTP Setup"
-        />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
-        />
-
-        {/* SEO Tags */}
-        <meta name="keywords" content="AI automation services, social growth, automation audit, ACTP setup" />
-        <meta name="robots" content="index, follow" />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Services • Dupree Ops, LLC" />
-        <meta
-          property="og:description"
-          content="Professional services: AI Automation Audit, Social Growth System, and ACTP Setup"
-        />
-        <meta property="og:url" content="https://dupreeops.com/services" />
-        <meta property="og:image" content="https://dupreeops.com/og-image.jpg" />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Services • Dupree Ops, LLC" />
-        <meta
-          name="twitter:description"
-          content="Professional services: AI Automation Audit, Social Growth System, and ACTP Setup"
-        />
-
-        {/* Theme & Mobile */}
-        <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
-        <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
-
-        {/* Canonical */}
-        <link rel="canonical" href="https://dupreeops.com/services" />
-      </Head>
+      <SeoHead
+        title="AI Automation Services | Dupree Ops, LLC"
+        description="AI automation audits, workflow implementation, social growth systems, and ACTP setup services from Isaiah Dupree and Dupree Ops, LLC."
+        path="/services"
+        keywords={['AI automation services', 'workflow automation', 'automation audit', 'Isaiah Dupree']}
+      />
 
       <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-10 space-y-6 sm:space-y-8">
