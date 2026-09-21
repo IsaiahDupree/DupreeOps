@@ -529,6 +529,14 @@ export default function Home() {
               <p>
                 © {new Date().getFullYear()} Dupree Ops, LLC • Built with Next.js & Tailwind CSS
               </p>
+              <p className="mt-2">
+                <a
+                  href="https://isaiah-dupree.vercel.app/"
+                  className="font-medium text-emerald-700 underline-offset-4 hover:underline dark:text-emerald-400"
+                >
+                  Explore Isaiah Dupree&apos;s public portfolio ↗
+                </a>
+              </p>
             </div>
           </footer>
         </div>
