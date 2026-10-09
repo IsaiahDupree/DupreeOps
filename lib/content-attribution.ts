@@ -45,7 +45,9 @@ function scrubProof() {
 /** Signed capability stays in memory; confirmed retries share the issuer's click key. */
 export function trackContentLanding(path: string): Promise<boolean> {
   if (typeof window === 'undefined') return Promise.resolve(false)
-  const body = parseContentAttribution(path, window.location.origin)
+  // The Next router can still be hydrating. Capture the actual document's
+  // capability before scrubbing it, even if its initial asPath lacks the query.
+  const body = parseContentAttribution(window.location.href || path, window.location.origin)
   // Remove even malformed capabilities before analytics or outbound navigation.
   scrubProof()
   if (!body) return Promise.resolve(false)
