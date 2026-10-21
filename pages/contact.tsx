@@ -3,6 +3,7 @@ import SeoHead from '@/components/SeoHead'
 import { useTheme } from '@/hooks/useTheme'
 import { trackThemeToggle, trackLinkClick, trackEmailClick } from '@/lib/analytics'
 import ContactForm from '@/components/ContactForm'
+import { dupreeOpsSchema, ISAIAH_ENTITY_ID, canonicalUrl } from '@/lib/seo'
 
 export default function Contact() {
   const { theme, toggleTheme } = useTheme()
@@ -20,6 +21,16 @@ export default function Contact() {
         description="Contact Isaiah Dupree and Dupree Ops, LLC about AI automation projects, partnerships, product support, and business verification."
         path="/contact"
         keywords={['contact Isaiah Dupree', 'Dupree Ops contact', 'AI automation partnership']}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'ContactPage',
+          '@id': `${canonicalUrl('/contact')}#webpage`,
+          url: canonicalUrl('/contact'),
+          name: 'Contact Isaiah Dupree and Dupree Ops, LLC',
+          about: { '@id': ISAIAH_ENTITY_ID },
+          mainEntity: { '@id': dupreeOpsSchema['@id'] },
+          publisher: { '@id': dupreeOpsSchema['@id'] },
+        }}
       />
 
       <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
@@ -46,7 +57,8 @@ export default function Contact() {
 
           {/* Contact form section */}
           <div className="rounded-lg border border-slate-200 bg-white/90 p-4 sm:p-5 md:p-6 dark:border-slate-800 dark:bg-slate-900/70">
-            <AsciiHeading label="GET IN TOUCH" />
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-50">Contact Isaiah Dupree and Dupree Ops, LLC</h1>
+            <div aria-hidden="true"><AsciiHeading label="GET IN TOUCH" /></div>
             <p className="mt-4 text-sm sm:text-base text-slate-700 dark:text-slate-200 mb-4 sm:mb-6">
               Have a project in mind or want to learn more about our services? Fill out the form below and
               we'll get back to you within 1-2 business days.
@@ -56,7 +68,7 @@ export default function Contact() {
 
           {/* Additional contact methods */}
           <div className="rounded-lg border border-slate-200 bg-white/90 p-4 sm:p-5 md:p-6 dark:border-slate-800 dark:bg-slate-900/70">
-            <AsciiHeading label="OTHER WAYS TO REACH US" />
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-slate-50">Other ways to reach us</h2>
 
             <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-5 text-sm sm:text-base text-slate-700 dark:text-slate-200">
               <div>
@@ -159,8 +171,7 @@ function AsciiHeading({ label }: { label: string }) {
   return (
     <pre
       className="text-xs md:text-sm leading-snug text-emerald-700 dark:text-emerald-400 whitespace-pre font-mono"
-      role="heading"
-      aria-level={2}
+      aria-hidden="true"
     >
 {`╔${line}╗
 ║ ${label.padEnd(line.length - 2, ' ')}║

@@ -1,4 +1,5 @@
 export const SITE_URL = 'https://www.dupreeops.com'
+export const ISAIAH_ENTITY_ID = 'https://isaiahdupree.com/#person'
 
 export const ISAIAH_PROFILE_URLS = [
   'https://www.linkedin.com/in/isaiah-dupree33/',
@@ -16,9 +17,9 @@ export function canonicalUrl(path = '/') {
 export const isaiahDupreeSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  '@id': `${SITE_URL}/#isaiah-dupree`,
+  '@id': ISAIAH_ENTITY_ID,
   name: 'Isaiah Dupree',
-  url: canonicalUrl('/isaiah-dupree'),
+  url: 'https://isaiahdupree.com/',
   jobTitle: 'Founder and AI Automation Engineer',
   description:
     'Isaiah Dupree is an aerospace engineer, software builder, and founder of Dupree Ops, LLC, focused on AI automation systems and practical software products.',
@@ -32,7 +33,7 @@ export const dupreeOpsSchema = {
   '@id': `${SITE_URL}/#organization`,
   name: 'Dupree Ops, LLC',
   url: SITE_URL,
-  founder: { '@id': `${SITE_URL}/#isaiah-dupree` },
+  founder: { '@id': ISAIAH_ENTITY_ID },
   email: 'hello@dupreeops.com',
   address: {
     '@type': 'PostalAddress',

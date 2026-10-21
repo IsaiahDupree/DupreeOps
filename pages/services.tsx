@@ -3,6 +3,7 @@ import SeoHead from '@/components/SeoHead'
 import { useTheme } from '@/hooks/useTheme'
 import { trackThemeToggle, trackLinkClick } from '@/lib/analytics'
 import { services } from '@/data/services'
+import { dupreeOpsSchema, ISAIAH_ENTITY_ID, canonicalUrl } from '@/lib/seo'
 import { testimonials } from '@/data/testimonials'
 
 export default function Services() {
@@ -21,6 +22,31 @@ export default function Services() {
         description="AI automation audits, workflow implementation, social growth systems, and ACTP setup services from Isaiah Dupree and Dupree Ops, LLC."
         path="/services"
         keywords={['AI automation services', 'workflow automation', 'automation audit', 'Isaiah Dupree']}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          '@id': `${canonicalUrl('/services')}#services`,
+          name: 'AI Automation Services from Dupree Ops, LLC',
+          itemListElement: services.map((service, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            item: {
+              '@type': 'Service',
+              name: service.name,
+              description: service.description,
+              provider: { '@id': dupreeOpsSchema['@id'] },
+              offers: {
+                '@type': 'Offer',
+                price: service.price.replace(/[^0-9.]/g, ''),
+                priceCurrency: 'USD',
+                url: service.ctaLink,
+                ...(service.billingPeriod === 'monthly' ? { priceSpecification: { '@type': 'UnitPriceSpecification', unitCode: 'MON', price: service.price.replace(/[^0-9.]/g, ''), priceCurrency: 'USD' } } : {}),
+              },
+            },
+          })),
+          provider: { '@id': dupreeOpsSchema['@id'] },
+          about: { '@id': ISAIAH_ENTITY_ID },
+        }}
       />
 
       <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
@@ -47,7 +73,8 @@ export default function Services() {
 
           {/* Title section */}
           <div className="rounded-lg border border-slate-200 bg-white/90 p-4 sm:p-5 md:p-6 dark:border-slate-800 dark:bg-slate-900/70">
-            <AsciiHeading label="SERVICES" />
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-50">AI Automation Services</h1>
+            <div aria-hidden="true"><AsciiHeading label="SERVICES" /></div>
             <p className="mt-4 text-sm sm:text-base md:text-lg text-slate-700 dark:text-slate-200 leading-relaxed">
               Professional services to help your business scale with AI and automation.
             </p>
@@ -234,8 +261,7 @@ function AsciiHeading({ label }: { label: string }) {
   return (
     <pre
       className="text-xs md:text-sm leading-snug text-emerald-700 dark:text-emerald-400 whitespace-pre font-mono"
-      role="heading"
-      aria-level={2}
+      aria-hidden="true"
     >
 {`╔${line}╗
 ║ ${label.padEnd(line.length - 2, ' ')}║
