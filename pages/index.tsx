@@ -68,14 +68,13 @@ export default function Home() {
   return (
     <>
       <SeoHead
-        title="Isaiah Dupree | AI Automation Engineer & Dupree Ops Founder"
-        description="Isaiah Dupree is an aerospace engineer, software builder, and founder of Dupree Ops, LLC, creating AI automation systems and practical software products."
+        title="Dupree Ops | AI Automation & Software Studio"
+        description="Dupree Ops, LLC builds software products and AI automation systems for creators, educators, and small businesses, including web and mobile apps, APIs, and internal tools."
         keywords={[
-          'Isaiah Dupree',
           'Dupree Ops',
-          'AI automation engineer',
-          'software founder',
-          'aerospace engineer',
+          'AI automation services',
+          'workflow automation',
+          'software studio',
         ]}
         jsonLd={[isaiahDupreeSchema, dupreeOpsSchema, dupreeOpsWebsiteSchema]}
       />
@@ -153,24 +152,24 @@ export default function Home() {
             </div>
           </header>
 
-          {/* HERO: founder / company snapshot (Yadwinder-style) */}
+          {/* HERO: commercial company identity */}
           <section aria-label="Company Snapshot">
             <div className="grid gap-4 sm:gap-5 md:grid-cols-[minmax(0,1.6fr)_minmax(0,1.2fr)]">
-              {/* Left: founder-style card */}
+              {/* Left: company overview */}
               <div className="rounded-lg border border-slate-200 bg-white/90 p-4 sm:p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/70">
-                <h1 className="text-lg sm:text-xl md:text-2xl font-display font-semibold">Isaiah Dupree</h1>
+                <h1 className="text-lg sm:text-xl md:text-2xl font-display font-semibold">Dupree Ops, LLC</h1>
                 <p className="mt-1 text-sm sm:text-base text-slate-600 dark:text-slate-300">
-                  Founder, Dupree Ops, LLC • AI & Automation Systems
+                  Software and AI automation studio
                 </p>
 
                 <p className="mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
-                  I build and operate software products that turn complex workflows into simple,
-                  repeatable systems. Dupree Ops, LLC is the studio behind several AI- and
-                  automation-powered tools for creators, engineers, and small businesses.
+                  Dupree Ops, LLC builds and operates software products and automation systems for
+                  creators, educators, and small businesses. We design web and mobile applications,
+                  APIs, and internal tools that make complex workflows simpler.
                 </p>
                 <p className="mt-2 text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">
-                  From engineering calculators to social growth infrastructure and custom
-                  automations, our focus is on clarity, reliability, and measurable impact.
+                  Explore our services, products, and public company information, or read about
+                  <a href="/isaiah-dupree" className="underline underline-offset-2"> Isaiah Dupree, the company&apos;s founder</a>.
                 </p>
 
                 <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-2.5 sm:gap-3">
@@ -531,7 +530,7 @@ export default function Home() {
               </p>
               <p className="mt-2">
                 <a
-                  href="https://isaiah-dupree.vercel.app/"
+                  href="https://isaiahdupree.com/"
                   className="font-medium text-emerald-700 underline-offset-4 hover:underline dark:text-emerald-400"
                 >
                   Explore Isaiah Dupree&apos;s public portfolio ↗
