@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import SeoHead from '@/components/SeoHead'
 import { useTheme } from '@/hooks/useTheme'
-import { trackThemeToggle, trackLinkClick, trackEmailClick } from '@/lib/analytics'
+import { analyticsMeasurementConfigured, requestAnalyticsPreferences, trackThemeToggle, trackLinkClick, trackEmailClick } from '@/lib/analytics'
 
 export default function Privacy() {
   const { theme, toggleTheme } = useTheme()
@@ -106,10 +106,28 @@ export default function Privacy() {
                   &gt;&gt; Cookies and Tracking
                 </p>
                 <p>
-                  We use cookies and similar tracking technologies to track activity on our
-                  services and store certain information. You can instruct your browser to refuse
-                  all cookies or to indicate when a cookie is being sent.
+                  Optional Google Analytics can measure page views, selected link and product
+                  clicks, and successful contact-form submissions after you choose to allow
+                  analytics. The Google tag is not loaded before consent. Contact form name, email
+                  address, and message are not sent to Google Analytics. Your browser may also
+                  provide controls for clearing stored site data.
                 </p>
+                <p className="mt-2">
+                  Separately, valid signed story or campaign links can send their campaign
+                  identifiers and landing-page path to our campaign-attribution services. This
+                  flow uses session storage for deduplication and is separate from Google Analytics.
+                </p>
+                {analyticsMeasurementConfigured() ? (
+                  <button
+                    type="button"
+                    onClick={requestAnalyticsPreferences}
+                    className="mt-3 min-h-11 rounded-lg border border-slate-400 px-4 text-sm font-medium hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800"
+                  >
+                    Manage optional analytics preferences
+                  </button>
+                ) : (
+                  <p className="mt-2 text-sm">Google Analytics is not currently configured for this site.</p>
+                )}
               </div>
 
               <div>

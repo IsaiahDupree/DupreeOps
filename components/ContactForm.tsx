@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { validateContactForm } from '@/lib/validation'
+import { trackEvent } from '@/lib/analytics'
 
 interface FormState {
   name: string
@@ -70,6 +71,7 @@ export default function ContactForm() {
       const data = await response.json()
 
       if (response.ok && data.success) {
+        trackEvent('contact_form_submitted')
         setSubmitStatus('success')
         setSuccessMessage("Thank you! Your message has been received. We'll get back to you soon.")
         setFormState({ name: '', email: '', message: '' })

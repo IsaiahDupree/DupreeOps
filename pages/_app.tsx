@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { trackPageView } from '@/lib/analytics'
+import AnalyticsConsentManager from '@/components/AnalyticsConsentManager'
 import { Space_Grotesk } from 'next/font/google'
 
 const spaceGrotesk = Space_Grotesk({
@@ -33,6 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={spaceGrotesk.variable}>
       <Component {...pageProps} />
+      <AnalyticsConsentManager />
     </div>
   )
 }
