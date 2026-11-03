@@ -1,4 +1,5 @@
 import '@/styles/globals.css'
+import PortfolioAnalyticsScript from 'next/script'
 import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -35,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <div className={spaceGrotesk.variable}>
       <Component {...pageProps} />
       <AnalyticsConsentManager />
+      <PortfolioAnalyticsScript id="portfolio-analytics-v1" src="https://isaiahdupreeapps.com/assets/portfolio-analytics-v1.js" data-site="dupreeops-com" strategy="afterInteractive" />
     </div>
   )
 }
