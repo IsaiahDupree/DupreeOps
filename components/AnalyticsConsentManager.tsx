@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import {
-  analyticsMeasurementConfigured,
   hasAnalyticsConsent,
   hasAnalyticsConsentChoice,
   initializeAnalyticsTag,
@@ -12,8 +11,7 @@ export default function AnalyticsConsentManager() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    if (!analyticsMeasurementConfigured()) return
-
+    // The root also loads the consent-gated portfolio tracker when GA4 is absent.
     setVisible(!hasAnalyticsConsentChoice())
     if (hasAnalyticsConsent()) initializeAnalyticsTag()
 
@@ -39,7 +37,7 @@ export default function AnalyticsConsentManager() {
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-xl text-sm leading-6">
-          Optional Google Analytics helps us understand which pages and contact paths are useful.
+          Optional analytics help us understand which pages and contact paths are useful.
           It stays off unless you allow it. Contact form details are never sent to analytics.{' '}
           <Link className="underline" href="/privacy">Privacy policy</Link>
         </p>

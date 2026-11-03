@@ -113,11 +113,15 @@ export default function Privacy() {
                   provide controls for clearing stored site data.
                 </p>
                 <p className="mt-2">
+                  After you allow analytics, the portfolio tracker sends anonymous page views,
+                  selected link clicks, and engagement events to PostHog. Its identifiers last
+                  only for the browser session, and contact-form contents are excluded.
+                </p>
+                <p className="mt-2">
                   Separately, valid signed story or campaign links can send their campaign
                   identifiers and landing-page path to our campaign-attribution services. This
                   flow uses session storage for deduplication and is separate from Google Analytics.
                 </p>
-                {analyticsMeasurementConfigured() ? (
                   <button
                     type="button"
                     onClick={requestAnalyticsPreferences}
@@ -125,7 +129,7 @@ export default function Privacy() {
                   >
                     Manage optional analytics preferences
                   </button>
-                ) : (
+                {!analyticsMeasurementConfigured() && (
                   <p className="mt-2 text-sm">Google Analytics is not currently configured for this site.</p>
                 )}
               </div>
