@@ -35,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={spaceGrotesk.variable}>
       <Component {...pageProps} />
+      <nav aria-label="Practical guides" style={{textAlign:"center",padding:"24px"}}><a href="/learn">Guides and practical articles</a></nav>
       <AnalyticsConsentManager />
       <PortfolioAnalyticsScript id="portfolio-analytics-v1" src="https://isaiahdupreeapps.com/assets/portfolio-analytics-v1.js" data-site="dupreeops-com" strategy="afterInteractive" />
     </div>
